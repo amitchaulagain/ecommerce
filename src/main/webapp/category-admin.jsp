@@ -131,31 +131,45 @@
 
 
             <div class="col-lg-9 col-md-8 col-12">
-                <table class="table shopping-summery">
+            <div class="row" style="float:right">
+              <a  class="btn btn-primary" role="button" style="color:blue"
+                                 	                         href="/createUser/>">Create</a>
+             </div>
+                <table class="table">
                     <thead>
+
+
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
                         <th>Description</th>
+                         <th>Action</th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>100</td>
-                        <td>Electronix</td>
-                        <td>mobiles,laptops,displays</td>
-                    </tr>
-                    <tr>
-                        <td>200</td>
-                        <td>Electrical</td>
-                        <td>Iron Fridge</td>
-                    </tr>
-                    <tr>
-                        <td>300</td>
-                        <td>Glasses</td>
-                        <td>Power glass, sun glasses</td>
-                    </tr>
+                    <c:forEach var="oneCategory" items="${categoryList}" >
+                    	                <tr>
+                    	                    <td><c:out value="${oneCategory.id}" /></td>
+                    	                    <td><c:out value="${oneCategory.name}" /></td>
+                    	                    <td><c:out value="${oneCategory.description}" /></td>
+
+                    	                    <td>
+                    	                     <a  role="button" style="color:blue"
+                                            	                        href="/user?id=<c:out value="${oneCategory.id }"/>">Details</a>
+                    	                    <a  role="button" style="color:blue"
+                    	                        href="/editUser?id=<c:out value="${oneCategory.id }"/>">Update</a>
+
+                    	                    <a  role="button" style="color:blue"
+                    	                        method ="D" href="/user?id=<c:out value="${oneCategory.id }"/>">Delete</a>
+
+                    	                    </td>
+
+                    	                </tr>
+                    	            </c:forEach>
+
+
+
                     </tbody>
                 </table>
 

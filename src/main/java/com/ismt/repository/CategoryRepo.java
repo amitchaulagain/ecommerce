@@ -42,7 +42,7 @@ public class CategoryRepo {
     }
 
 
-    public List<Category> listCategorys() {
+    public List<Category> list() {
 
         final String QUERY = "select * from category ";
 

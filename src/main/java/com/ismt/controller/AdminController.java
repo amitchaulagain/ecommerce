@@ -1,5 +1,8 @@
 package com.ismt.controller;
 
+import com.ismt.model.Category;
+import com.ismt.repository.CategoryRepo;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 /*
@@ -24,7 +28,7 @@ import java.io.IOException;
 public class AdminController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-
+    CategoryRepo repo = new CategoryRepo();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,6 +40,8 @@ public class AdminController extends HttpServlet {
         if (request.getServletPath().equals("/category") || request.getServletPath().equals("/admin")) {
 
             request.setAttribute("entity", "Category");
+            List<Category> categories = repo.list();
+            request.setAttribute("categoryList", categories);
 
             RequestDispatcher view = request.getRequestDispatcher("category-admin.jsp");
             view.forward(request, response);
