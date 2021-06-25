@@ -20,7 +20,7 @@ import java.io.IOException;
  *
  *
  * */
-@WebServlet(urlPatterns = {"/admin","/admin/orders"})
+@WebServlet(urlPatterns = {"/category", "/product", "/order", "/admin"})
 public class AdminController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -30,17 +30,23 @@ public class AdminController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String path=request.getServletPath();
+        String path = request.getServletPath();
         System.out.println(path);
 
-        if (request.getServletPath().equals("/ecommerce")) {
+        if (request.getServletPath().equals("/category") || request.getServletPath().equals("/admin")) {
 
-            request.setAttribute("company", "ISMT E-Commerce App");
-            request.setAttribute("test", "We are testing");
+            request.setAttribute("entity", "Category");
 
-            RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("category-admin.jsp");
             view.forward(request, response);
 
+        } else if (request.getServletPath().equals("/product")) {
+
+            request.setAttribute("entity", "Product");
+
+            RequestDispatcher view = request.getRequestDispatcher("product-admin.jsp");
+            view.forward(request, response);
         }
+
     }
 }
