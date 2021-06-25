@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -43,16 +44,52 @@ public class AdminController extends HttpServlet {
             List<Category> categories = repo.list();
             request.setAttribute("categoryList", categories);
 
-            RequestDispatcher view = request.getRequestDispatcher("category-admin.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("admin/category/category-admin.jsp");
             view.forward(request, response);
 
         } else if (request.getServletPath().equals("/product")) {
 
             request.setAttribute("entity", "Product");
 
-            RequestDispatcher view = request.getRequestDispatcher("product-admin.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("admin/product/product-admin.jsp");
             view.forward(request, response);
         }
 
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        if (request.getServletPath().equals("/category")) {
+
+            Category user = getCategoryData(request);
+
+            try {
+                repo.insert(user);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            response.sendRedirect("/category");
+
+        }
+
+
+    }
+
+    private Category getCategoryData(HttpServletRequest request) {
+        Category category = new Category();
+        category.setId(Integer.parseInt(request.getParameter("id")));
+        category.setName(request.getParameter("name"));
+        category.setDescription(request.getParameter("description"));
+        return category;
+    }
+
+
+
+
+
+
+
+
 }
