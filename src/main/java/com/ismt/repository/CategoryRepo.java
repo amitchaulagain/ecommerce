@@ -21,9 +21,10 @@ public class CategoryRepo {
 
 
         // Step 1: Establishing a Connection
-        try (Connection connection = JDBCUtils.getConnection();
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CATEGORY_SQL)) {
+        try {
+            Connection connection = JDBCUtils.getConnection();
+            // Step 2:Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CATEGORY_SQL);
             preparedStatement.setInt(1, category.getId());
             preparedStatement.setString(2, category.getName());
             preparedStatement.setString(3, category.getDescription());

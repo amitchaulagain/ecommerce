@@ -28,7 +28,7 @@ public class UserRepo {
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getUsername());
             preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setString(5,user.getRole());
+            preparedStatement.setString(5, user.getRole());
 
 
             System.out.println(preparedStatement);
@@ -160,5 +160,31 @@ public class UserRepo {
         }
 
     }
-}
 
+    public User checkLogin(String username, String password) throws SQLException,
+            ClassNotFoundException {
+        String sql = "SELECT * FROM user WHERE username = ? and password = ?";
+        User user = null;
+        try {
+            Connection connection = JDBCUtils.getConnection();
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
+            statement.setString(2, password);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                user = new User();
+                user.setName(result.getString("name"));
+                user.setRole(result.getString("role"));
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+
+
+    }
+}

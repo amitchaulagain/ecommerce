@@ -1,3 +1,4 @@
+com/ismt/controller/LoginServlet.class
 com/ismt/repository/UserRepo.class
 com/ismt/controller/FrontEndController.class
 com/ismt/model/Category.class
