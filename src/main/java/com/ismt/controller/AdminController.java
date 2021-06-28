@@ -1,7 +1,11 @@
 package com.ismt.controller;
 
 import com.ismt.model.Category;
+import com.ismt.model.Order;
+import com.ismt.model.Product;
 import com.ismt.repository.CategoryRepo;
+import com.ismt.repository.OrderRepo;
+import com.ismt.repository.ProductRepo;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,7 +33,9 @@ import java.util.List;
 public class AdminController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    CategoryRepo repo = new CategoryRepo();
+    CategoryRepo categoryRepo = new CategoryRepo();
+    ProductRepo productRepo =new ProductRepo();
+    OrderRepo orderRepo = new OrderRepo();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,7 +47,7 @@ public class AdminController extends HttpServlet {
         if (request.getServletPath().equals("/category") || request.getServletPath().equals("/admin")) {
 
             request.setAttribute("entity", "Category");
-            List<Category> categories = repo.list();
+            List<Category> categories = categoryRepo.list();
             request.setAttribute("categoryList", categories);
 
             RequestDispatcher view = request.getRequestDispatcher("admin/category/category-admin.jsp");
@@ -50,8 +56,17 @@ public class AdminController extends HttpServlet {
         } else if (request.getServletPath().equals("/product")) {
 
             request.setAttribute("entity", "Product");
-
+            List<Product> products = productRepo.listProduct();
+            request.setAttribute("productList", products);
             RequestDispatcher view = request.getRequestDispatcher("admin/product/product-admin.jsp");
+            view.forward(request, response);
+        }
+         else if (request.getServletPath().equals("/order")) {
+
+            request.setAttribute("entity", "Order");
+            List<Order> orders = orderRepo.listOrder();
+            request.setAttribute("orderList",orders);
+            RequestDispatcher view = request.getRequestDispatcher("admin/order/order-admin.jsp");
             view.forward(request, response);
         }
 
@@ -66,7 +81,7 @@ public class AdminController extends HttpServlet {
             Category user = getCategoryData(request);
 
             try {
-                repo.insert(user);
+                categoryRepo.insert(user);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

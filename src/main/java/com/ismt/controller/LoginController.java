@@ -3,22 +3,24 @@ package com.ismt.controller;
 import com.ismt.model.User;
 import com.ismt.repository.UserRepo;
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(urlPatterns = {"/signin", "/signup"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/signin", "/signup","/login","/login-user"})
+public class LoginController extends HttpServlet {
 
     UserRepo userRepo = new UserRepo();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -26,35 +28,33 @@ public class LoginServlet extends HttpServlet {
 
         try {
             user = userRepo.checkLogin(username, password);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        if(!user.equals(null)){
+
+        if(!(user.equals(null))){
+//            request.setAttribute("userInfo", user);
+//            response.sendRedirect("/admin");
+            HttpSession session =request.getSession();
+
+            session.setAttribute("userInfo",  user.getName() + "  "+ " "+ "role:" + user.getRole());
             response.sendRedirect("/admin");
         }
         else{
-            response.sendRedirect("/signin");
-
+            response.sendRedirect("/login");
         }
 
-
-
-
     }
-
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if (request.getServletPath().equals("/signin")) {
+        if (request.getServletPath().equals("/signin") || request.getServletPath().equals("/login")) {
 
-            RequestDispatcher view = request.getRequestDispatcher("login/signin.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/login-signup/login.jsp");
             view.forward(request, response);
 
         }
-
 
     }
 

@@ -46,8 +46,6 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/responsive.css">
-
-
 </head>
 <body class="js">
 
@@ -63,8 +61,6 @@
 <!-- End Preloader -->
 
 <!-- Header -->
-
-<h1 style="color:green"> ${entity}</h1>
 
 <header class="header shop">
     <!-- Topbar -->
@@ -111,7 +107,10 @@
     </div>
     <!--/ End Header Inner -->
 </header>
+<h2 class="text-center">Welcome ${userInfo}</h2>
 <section class="product-area shop-sidebar shop section">
+<div class="text-center mb-0" style="color:green;"><h1 class="text-uppercase ">${entity}</h1>
+<a  class="btn btn-primary" role="button" style="color:black; background-color:yellow;" href="/createUser/>">Create</a></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-4 col-12">
@@ -119,10 +118,10 @@
                     <!-- Single Widget -->
                     <div class="single-widget category">
                         <h3 class="title">Admin Panel</h3>
-                        <ul class="categor-list">
-                            <li><a href="#">Category</a></li>
-                            <li><a href="#">Product</a></li>
-                            <li><a href="#">Orders</a></li>
+                        <ul class="category-list">
+                       	<li><a href="/category">Category</a></li>
+                        <li><a href="/product">Product</a></li>
+                        <li><a href="/order">Order</a></li>
                         </ul>
                     </div>
 
@@ -131,45 +130,35 @@
 
 
             <div class="col-lg-9 col-md-8 col-12">
-            <div class="row" style="float:right">
-              <a  class="btn btn-primary" role="button" style="color:blue"
-                                 	                         href="/createUser/>">Create</a>
-             </div>
-                <table class="table">
+                <table class="table shopping-summery">
                     <thead>
-
-
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
                         <th>Description</th>
-                         <th>Action</th>
-
+                        <th>Actions</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <c:forEach var="oneCategory" items="${categoryList}" >
-                    	                <tr>
-                    	                    <td><c:out value="${oneCategory.id}" /></td>
-                    	                    <td><c:out value="${oneCategory.name}" /></td>
-                    	                    <td><c:out value="${oneCategory.description}" /></td>
 
-                    	                    <td>
-                    	                     <a  role="button" style="color:blue"
-                                            	                        href="/user?id=<c:out value="${oneCategory.id }"/>">Details</a>
-                    	                    <a  role="button" style="color:blue"
-                    	                        href="/editUser?id=<c:out value="${oneCategory.id }"/>">Update</a>
+    <c:forEach var="oneCategory" items="${categoryList}" >
+            <tr class="text-center">
+                <td><c:out value="${oneCategory.id}" /></td>
+                <td><c:out value="${oneCategory.name}" /></td>
+                <td><c:out value="${oneCategory.description}" /></td>
 
-                    	                    <a  role="button" style="color:blue"
-                    	                        method ="D" href="/user?id=<c:out value="${oneCategory.id }"/>">Delete</a>
+                <td>
+                 <a  role="button" style="color:white; padding:1px 5px 1px 5px;" class="btn"
+                                            href="/user?id=<c:out value="${oneCategory.id }"/>">Details</a>
+                <a  role="button"style="color:white; padding:1px 5px 1px 5px;" class="btn"
+                    href="/editUser?id=<c:out value="${oneCategory.id }"/>">Update</a>
 
-                    	                    </td>
+                <a  role="button" style="color:white; padding:1px 5px 1px 5px;" class="btn"
+                    method ="D" href="/user?id=<c:out value="${oneCategory.id }"/>">Delete</a>
 
-                    	                </tr>
-                    	            </c:forEach>
+                </td>
 
-
-
+            </tr>
+        </c:forEach>
                     </tbody>
                 </table>
 
