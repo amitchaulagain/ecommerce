@@ -51,7 +51,7 @@ public class LoginController extends HttpServlet {
 
         if (request.getServletPath().equals("/signin") || request.getServletPath().equals("/login")) {
 
-            RequestDispatcher view = request.getRequestDispatcher("/login-signup/login.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("/login/login.jsp");
             view.forward(request, response);
 
         }
