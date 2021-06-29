@@ -88,7 +88,7 @@ pageEncoding="ISO-8859-1" %>
 								<li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
 								<li><i class="ti-user"></i> <a href="#">My account</a></li>
 								<li><i class="ti-power-off"></i><a href="/login">Login</a></li>
-								<li><i class="ti-power-off"></i><a href="signup.jsp">Create New Account</a></li>
+								<li><i class="ti-power-off"></i><a href="/signup">Create New Account</a></li>
 							</ul>
 						</div>
 						<!-- End Top Right -->
