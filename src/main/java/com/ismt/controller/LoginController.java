@@ -51,9 +51,6 @@ public class LoginController extends HttpServlet {
             String uname = request.getParameter("username");
             String pass = request.getParameter("password");
             String role = request.getParameter("role");
-
-
-
             response.sendRedirect("/admin");
         }
 
