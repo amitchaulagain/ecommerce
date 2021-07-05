@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1" %>
+<html lang="zxx">
 <head>
 	<!-- Meta Tag -->
     <meta charset="utf-8">
@@ -15,11 +15,12 @@
 	<link rel="icon" type="image/png" href="images/favicon.png">
 	<!-- Web Font -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
-	
+
 	<!-- StyleSheet -->
-	
+
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/header.css">
 	<!-- Magnific Popup -->
     <link rel="stylesheet" href="css/magnific-popup.min.css">
 	<!-- Font Awesome -->
@@ -38,17 +39,19 @@
     <link rel="stylesheet" href="css/owl-carousel.css">
 	<!-- Slicknav -->
     <link rel="stylesheet" href="css/slicknav.min.css">
-	
+
 	<!-- Eshop StyleSheet -->
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/responsive.css">
 
-	
-	
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
+
+
 </head>
 <body class="js">
-	
+
 	<!-- Preloader -->
 	<div class="preloader">
 		<div class="preloader-inner">
@@ -59,8 +62,8 @@
 		</div>
 	</div>
 	<!-- End Preloader -->
-	
-	
+
+
 	<!-- Header -->
 	<header class="header shop">
 		<!-- Topbar -->
@@ -84,7 +87,8 @@
 								<li><i class="ti-location-pin"></i> Store location</li>
 								<li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
 								<li><i class="ti-user"></i> <a href="#">My account</a></li>
-								<li><i class="ti-power-off"></i><a href="login.html#">Login</a></li>
+								<li><i class="ti-power-off"></i><a href="/login">Login</a></li>
+								<li><i class="ti-power-off"></i><a href="/signup">Create New Account</a></li>
 							</ul>
 						</div>
 						<!-- End Top Right -->
@@ -99,9 +103,9 @@
 					<div class="col-lg-2 col-md-2 col-12">
 						<!-- Logo -->
 						<div class="logo">
-							<a href="index.jsp"><img src="images/logo.png" alt="logo"></a>
-						<c:out value="${company}" />
-
+							<a href="index.jsp"><img src="images/logo.png" alt="logo"></a><br/>
+							<span style="font-family:'Potta One', cursive;">${companyName}</span>
+						</div>
 						<!--/ End Logo -->
 						<!-- Search Form -->
 						<div class="search-top">
@@ -180,11 +184,16 @@
 				</div>
 			</div>
 		</div>
+		<div class="admin-panel text-center">
+<a href="/admin" class="admin-text"><h1>Go to Admin Panel</h1></a>
+		</div>
 		<!-- Header Inner -->
 		<div class="header-inner">
 			<div class="container">
 				<div class="cat-nav-head">
+
 					<div class="row">
+
 						<div class="col-lg-3">
 							<div class="all-category">
 								<h3 class="cat-heading"><i class="fa fa-bars" aria-hidden="true"></i>CATEGORIES</h3>
@@ -257,11 +266,11 @@
 							<div class="menu-area">
 								<!-- Main Menu -->
 								<nav class="navbar navbar-expand-lg">
-									<div class="navbar-collapse">	
-										<div class="nav-inner">	
+									<div class="navbar-collapse">
+										<div class="nav-inner">
 											<ul class="nav main-menu menu navbar-nav">
 													<li class="active"><a href="#">Home</a></li>
-													<li><a href="#">Product</a></li>												
+													<li><a href="#">Product</a></li>
 													<li><a href="#">Service</a></li>
 													<li><a href="#">Shop<i class="ti-angle-down"></i><span class="new">New</span></a>
 														<ul class="dropdown">
@@ -270,7 +279,7 @@
 															<li><a href="checkout.html">Checkout</a></li>
 														</ul>
 													</li>
-													<li><a href="#">Pages</a></li>									
+													<li><a href="#">Pages</a></li>
 													<li><a href="#">Blog<i class="ti-angle-down"></i></a>
 														<ul class="dropdown">
 															<li><a href="blog-single-sidebar.html">Blog Single Sidebar</a></li>
@@ -281,7 +290,7 @@
 										</div>
 									</div>
 								</nav>
-								<!--/ End Main Menu -->	
+								<!--/ End Main Menu -->
 							</div>
 						</div>
 					</div>
@@ -291,7 +300,7 @@
 		<!--/ End Header Inner -->
 	</header>
 	<!--/ End Header -->
-	
+
 	<!-- Slider Area -->
 	<section class="hero-slider">
 		<!-- Single Slider -->
@@ -319,7 +328,7 @@
 		<!--/ End Single Slider -->
 	</section>
 	<!--/ End Slider Area -->
-	
+
 	<!-- Start Small Banner  -->
 	<section class="small-banner section">
 		<div class="container-fluid">
@@ -364,7 +373,7 @@
 		</div>
 	</section>
 	<!-- End Small Banner -->
-	
+
 	<!-- Start Product Area -->
     <div class="product-area section">
             <div class="container">
@@ -1718,7 +1727,7 @@
             </div>
     </div>
 	<!-- End Product Area -->
-	
+
 	<!-- Start Midium Banner  -->
 	<section class="midium-banner">
 		<div class="container">
@@ -1751,7 +1760,7 @@
 		</div>
 	</section>
 	<!-- End Midium Banner -->
-	
+
 	<!-- Start Most Popular -->
 	<div class="product-area most-popular section">
         <div class="container">
@@ -1878,7 +1887,7 @@
         </div>
     </div>
 	<!-- End Most Popular Area -->
-	
+
 	<!-- Start Shop Home List  -->
 	<section class="shop-home-list section">
 		<div class="container">
@@ -2076,7 +2085,7 @@
 		</div>
 	</section>
 	<!-- End Shop Home List  -->
-	
+
 	<!-- Start Cowndown Area -->
 	<section class="cown-down">
 		<div class="section-inner ">
@@ -2085,8 +2094,8 @@
 					<div class="col-lg-6 col-12 padding-right">
 						<div class="image">
 							<img src="https://via.placeholder.com/750x590" alt="#">
-						</div>	
-					</div>	
+						</div>
+					</div>
 					<div class="col-lg-6 col-12 padding-left">
 						<div class="content">
 							<div class="heading-block">
@@ -2098,14 +2107,14 @@
 									<div class="clearfix" data-countdown="2021/02/30"></div>
 								</div>
 							</div>
-						</div>	
-					</div>	
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- /End Cowndown Area -->
-	
+
 	<!-- Start Shop Blog  -->
 	<section class="shop-blog section">
 		<div class="container">
@@ -2157,7 +2166,7 @@
 		</div>
 	</section>
 	<!-- End Shop Blog  -->
-	
+
 	<!-- Start Shop Services Area -->
 	<section class="shop-services section home">
 		<div class="container">
@@ -2202,7 +2211,7 @@
 		</div>
 	</section>
 	<!-- End Shop Services Area -->
-	
+
 	<!-- Start Shop Newsletter  -->
 	<section class="shop-newsletter section">
 		<div class="container">
@@ -2225,7 +2234,7 @@
 		</div>
 	</section>
 	<!-- End Shop Newsletter -->
-	
+
 	<!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -2338,7 +2347,7 @@
             </div>
     </div>
     <!-- Modal end -->
-	
+
 	<!-- Start Footer Area -->
 	<footer class="footer">
 		<!-- Footer Top -->
@@ -2349,7 +2358,7 @@
 						<!-- Single Widget -->
 						<div class="single-footer about">
 							<div class="logo">
-								<a href="index.html"><img src="images/logo2.png" alt="#"></a>
+								<a href="index.jsp"><img src="images/logo2.png" alt="#"></a>
 							</div>
 							<p class="text">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue,  magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
 							<p class="call">Got Question? Call us 24/7<span><a href="tel:123456789">+0123 456 789</a></span></p>

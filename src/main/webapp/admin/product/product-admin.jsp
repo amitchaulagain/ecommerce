@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="css/responsive.css">
 
 
+
 </head>
 <body class="js">
 
@@ -63,7 +64,6 @@
 <!-- End Preloader -->
 
 <!-- Header -->
-<h1 style="color:green"> ${entity}</h1>
 
 <header class="header shop">
     <!-- Topbar -->
@@ -111,6 +111,7 @@
     <!--/ End Header Inner -->
 </header>
 <section class="product-area shop-sidebar shop section">
+<div class="text-center mb-0" style="color:green;"><h1 class="text-uppercase ">${entity}</h1></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-4 col-12">
@@ -118,10 +119,10 @@
                     <!-- Single Widget -->
                     <div class="single-widget category">
                         <h3 class="title">Admin Panel</h3>
-                        <ul class="categor-list">
-                            <li><a href="#">Category</a></li>
-                            <li><a href="#">Product</a></li>
-                            <li><a href="#">Orders</a></li>
+                        <ul class="category-list">
+                       	<li><a href="/category">Category</a></li>
+                        <li><a href="/product">Product</a></li>
+                        <li><a href="/order">Order</a></li>
                         </ul>
                     </div>
 
@@ -131,30 +132,34 @@
 
             <div class="col-lg-9 col-md-8 col-12">
                 <table class="table shopping-summery">
-                    <thead>
+                    <thead >
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
                         <th>Description</th>
-
+                        <th>Actions</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>100</td>
-                        <td>Electronix</td>
-                        <td>mobiles,laptops,displays</td>
-                    </tr>
-                    <tr>
-                        <td>200</td>
-                        <td>Electrical</td>
-                        <td>Iron Fridge</td>
-                    </tr>
-                    <tr>
-                        <td>300</td>
-                        <td>Glasses</td>
-                        <td>Power glass, sun glasses</td>
-                    </tr>
+
+    <c:forEach var="oneProduct" items="${productList}" >
+            <tr class="text-center">
+                <td><c:out value="${oneProduct.id}" /></td>
+                <td><c:out value="${oneProduct.name}" /></td>
+                <td><c:out value="${oneProduct.description}" /></td>
+
+                <td>
+                 <a  role="button" style="color:white; padding:1px 5px 1px 5px;" class="btn"
+                                            href="/user?id=<c:out value="${oneProduct.id }"/>">Details</a>
+                <a  role="button"style="color:white; padding:1px 5px 1px 5px;" class="btn"
+                    href="/editUser?id=<c:out value="${oneProduct.id }"/>">Update</a>
+
+                <a  role="button" style="color:white; padding:1px 5px 1px 5px;" class="btn"
+                    method ="D" href="/user?id=<c:out value="${oneProduct.id }"/>">Delete</a>
+
+                </td>
+
+            </tr>
+        </c:forEach>
                     </tbody>
                 </table>
 

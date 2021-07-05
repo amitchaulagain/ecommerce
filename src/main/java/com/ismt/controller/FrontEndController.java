@@ -36,8 +36,6 @@ public class FrontEndController extends HttpServlet {
         if (request.getServletPath().equals("/ecommerce")) {
 
             request.setAttribute("company", "ISMT E-Commerce App");
-            request.setAttribute("test", "We are testing");
-
             RequestDispatcher view = request.getRequestDispatcher("index.jsp");
             view.forward(request, response);
 

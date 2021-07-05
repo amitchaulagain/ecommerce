@@ -1,21 +1,33 @@
 package com.ismt.model;
 
 public class Order {
-	private int id;
-	private String name;
-	private String username;
-	private String password;
-	private String role;
+	int id;
+	String order_number;
+	String total;
+	int customer_id;
+
+	public Order(int id, String order_number, String total) {
+		this.id = id;
+		this.order_number = order_number;
+		this.total = total;
+	}
 
 	public Order() {
 	}
 
-	public Order(int id, String name, String username, String password, String role) {
+	public int getCustomer_id() {
+		return customer_id;
+	}
+
+	public void setCustomer_id(int customer_id) {
+		this.customer_id = customer_id;
+	}
+
+	public Order(int id, String order_number, String total, int customer_id) {
 		this.id = id;
-		this.name = name;
-		this.username = username;
-		this.password = password;
-		this.role = role;
+		this.order_number = order_number;
+		this.total = total;
+		this.customer_id = customer_id;
 	}
 
 	public int getId() {
@@ -26,35 +38,19 @@ public class Order {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getOrder_number() {
+		return order_number;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setOrder_number(String order_number) {
+		this.order_number = order_number;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getTotal() {
+		return total;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
+	public void setTotal(String total) {
+		this.total = total;
 	}
 }
