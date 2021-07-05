@@ -13,33 +13,34 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(urlPatterns = {"/signin", "/signup"})
-public class LoginServlet extends HttpServlet {
+public class LoginController extends HttpServlet {
 
     UserRepo userRepo = new UserRepo();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String username = request.getParameter("username");
+        String username = request.getParameter("username")  ;
         String password = request.getParameter("password");
         User user = null;
 
         try {
             user = userRepo.checkLogin(username, password);
+            if (!user.equals(null)) {
+                request.getSession().setAttribute("authenticatedUser", user);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        if(!user.equals(null)){
+        if (!user.equals(null)) {
             response.sendRedirect("/admin");
-        }
-        else{
+        } else {
             response.sendRedirect("/signin");
 
         }
-
-
 
 
     }

@@ -65,6 +65,10 @@
 <!-- Header -->
 
 <h1 style="color:green"> ${entity}</h1>
+<h1 style="color:green; float:left"> ${verifiedUser.name}</h1>
+<h1 style="color:green; float:left"> ${authenticatedUser.name}</h1>
+
+
 
 <header class="header shop">
     <!-- Topbar -->

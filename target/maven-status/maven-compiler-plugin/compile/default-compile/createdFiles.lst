@@ -1,4 +1,3 @@
-com/ismt/controller/LoginServlet.class
 com/ismt/repository/UserRepo.class
 com/ismt/controller/FrontEndController.class
 com/ismt/model/Category.class
@@ -8,4 +7,5 @@ com/ismt/controller/HelloServlet.class
 com/ismt/model/Product.class
 com/ismt/controller/HeroServlet.class
 com/ismt/controller/AdminController.class
+com/ismt/controller/LoginController.class
 com/ismt/JDBCUtils.class

@@ -1,6 +1,7 @@
 package com.ismt.controller;
 
 import com.ismt.model.Category;
+import com.ismt.model.User;
 import com.ismt.repository.CategoryRepo;
 
 import javax.servlet.RequestDispatcher;
@@ -40,7 +41,10 @@ public class AdminController extends HttpServlet {
 
         if (request.getServletPath().equals("/category") || request.getServletPath().equals("/admin")) {
 
+
+
             request.setAttribute("entity", "Category");
+
             List<Category> categories = repo.list();
             request.setAttribute("categoryList", categories);
 
@@ -84,12 +88,6 @@ public class AdminController extends HttpServlet {
         category.setDescription(request.getParameter("description"));
         return category;
     }
-
-
-
-
-
-
 
 
 }
