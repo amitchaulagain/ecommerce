@@ -123,6 +123,8 @@ public class CategoryRepo {
             String name = rs.getString("name");
             String description = rs.getString("description");
 
+             category= new Category(categoryId,name,description);
+
             //}
         } catch (SQLException e) {
             JDBCUtils.printSQLException(e);

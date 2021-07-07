@@ -1,14 +1,14 @@
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/controller/FrontEndController.java
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/repository/UserRepo.java
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/repository/ProductRepo.java
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/controller/LoginController.java
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/controller/AdminController.java
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/controller/HelloServlet.java
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/repository/OrderRepo.java
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/model/User.java
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/model/Product.java
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/model/Order.java
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/model/Category.java
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/repository/CategoryRepo.java
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/JDBCUtils.java
-/home/hero/Documents/application dev/ismt-p7/ecommerce/src/main/java/com/ismt/controller/HeroServlet.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/model/Category.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/controller/LoginController.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/model/Order.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/controller/HelloServlet.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/model/User.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/repository/OrderRepo.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/controller/AdminController.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/JDBCUtils.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/controller/FrontEndController.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/repository/ProductRepo.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/controller/HeroServlet.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/repository/UserRepo.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/repository/CategoryRepo.java
+/Users/admin/college/our-college/ecommerce/ecommerce/src/main/java/com/ismt/model/Product.java

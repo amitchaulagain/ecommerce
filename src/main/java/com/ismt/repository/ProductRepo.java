@@ -1,6 +1,7 @@
 package com.ismt.repository;
 
 import com.ismt.JDBCUtils;
+import com.ismt.model.Category;
 import com.ismt.model.Product;
 
 import java.sql.Connection;
@@ -59,8 +60,16 @@ public class ProductRepo {
                 String name = rs.getString("name");
                 String description = rs.getString("description");
                 Double price = rs.getDouble("price");
-                System.out.println(id + "," + name + "," + description+" "+price);
-                products.add(new Product(id, name, description,price));
+                int categoryId = rs.getInt("category_id");
+
+
+                CategoryRepo categoryRepo = new CategoryRepo();
+                Category category = categoryRepo.getById(categoryId);
+
+                String categoryName = category.getName();
+
+                System.out.println(id + "," + name + "," + description + " " + price);
+                products.add(new Product(id, name, description, price, categoryName));
             }
         } catch (SQLException e) {
             JDBCUtils.printSQLException(e);
@@ -114,8 +123,8 @@ public class ProductRepo {
             String name = rs.getString("name");
             String description = rs.getString("description");
             Double price = rs.getDouble("price");
-            System.out.println(id + "," + name + "," + description+ "," + price);
-            product = new Product(ProductId, name, description,price);
+            System.out.println(id + "," + name + "," + description + "," + price);
+            product = new Product(ProductId, name, description, price);
 
             //}
         } catch (SQLException e) {
