@@ -1,5 +1,8 @@
 package com.ismt.controller;
 
+import com.ismt.model.Product;
+import com.ismt.repository.ProductRepo;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 /*
@@ -20,10 +24,11 @@ import java.io.IOException;
  *
  *
  * */
-@WebServlet(urlPatterns = {"/ecommerce", "/checkout"})
+@WebServlet(urlPatterns = {"/ecommerce", "/checkout", "/chart", "/"})
 public class FrontEndController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    ProductRepo productRepo =new ProductRepo();
 
 
     @Override
@@ -33,12 +38,13 @@ public class FrontEndController extends HttpServlet {
         String path=request.getServletPath();
         System.out.println(path);
 
-        if (request.getServletPath().equals("/ecommerce")) {
+        if (request.getServletPath().equals("/ecommerce") || request.getServletPath().equals("/chart") || request.getServletPath().equals("/")) {
 
             request.setAttribute("company", "ISMT E-Commerce App");
+            List<Product> products =  productRepo.listProductForFrontEnd();
+            request.setAttribute("listProduct", products);
             RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-            view.forward(request, response);
-
+            view.forward(request,response);
         }
     }
 }

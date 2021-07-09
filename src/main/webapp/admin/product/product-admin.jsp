@@ -137,6 +137,8 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Description</th>
+                        <th>Price</th>
+                        <th>Category Name </th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -146,7 +148,8 @@
                 <td><c:out value="${oneProduct.id}" /></td>
                 <td><c:out value="${oneProduct.name}" /></td>
                 <td><c:out value="${oneProduct.description}" /></td>
-
+                 <td><c:out value="${oneProduct.price}" /></td>
+    <td><c:out value="${oneProduct.categoryName}" /> </td>
                 <td>
                  <a  role="button" style="color:white; padding:1px 5px 1px 5px;" class="btn"
                                             href="/user?id=<c:out value="${oneProduct.id }"/>">Details</a>

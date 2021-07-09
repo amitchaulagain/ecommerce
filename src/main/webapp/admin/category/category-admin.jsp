@@ -110,7 +110,7 @@
 <h2 class="text-center">Welcome ${userInfo}</h2>
 <section class="product-area shop-sidebar shop section">
 <div class="text-center mb-0" style="color:green;"><h1 class="text-uppercase ">${entity}</h1>
-<a  class="btn btn-primary" role="button" style="color:black; background-color:yellow;" href="/createUser/>">Create</a></div>
+<a  class="btn btn-primary" role="button" style="color:black; background-color:yellow;" href="/createProduct">Create</a></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-4 col-12">
