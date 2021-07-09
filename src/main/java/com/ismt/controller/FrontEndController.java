@@ -1,5 +1,8 @@
 package com.ismt.controller;
 
+import com.ismt.model.Product;
+import com.ismt.repository.ProductRepo;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 /*
@@ -20,10 +24,11 @@ import java.io.IOException;
  *
  *
  * */
-@WebServlet(urlPatterns = {"/ecommerce", "/checkout"})
+@WebServlet(urlPatterns = {"/ecommerce", "/checkout","/home"})
 public class FrontEndController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    ProductRepo productRepo= new ProductRepo();
 
 
     @Override
@@ -40,5 +45,19 @@ public class FrontEndController extends HttpServlet {
             view.forward(request, response);
 
         }
+
+        if (request.getServletPath().equals("/home")) {
+
+        List<Product> products= productRepo.showAllProductsForFrontEnd();
+            request.setAttribute("products",products);
+            request.setAttribute("hello","hello");
+
+            RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+            view.forward(request, response);
+
+        }
+
+
+
     }
 }

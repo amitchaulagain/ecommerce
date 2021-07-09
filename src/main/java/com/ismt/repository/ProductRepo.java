@@ -158,5 +158,41 @@ public class ProductRepo {
         }
 
     }
+
+
+    public List<Product> showAllProductsForFrontEnd() {
+
+        final String QUERY = "select * from product ";
+
+        // using try-with-resources to avoid closing resources (boiler plate code)
+
+        // Step 1: Establishing a Connection
+        List<Product> products = new ArrayList<>();
+        try (Connection connection = JDBCUtils.getConnection();
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);) {
+            // preparedStatement.setInt(1, 1);
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                Double price = rs.getDouble("price");
+                //int categoryId = rs.getInt("category_id");
+
+                System.out.println(id + "," + name + "," + description + " " + price);
+                products.add(new Product(id, name, description, price));
+            }
+        } catch (SQLException e) {
+            JDBCUtils.printSQLException(e);
+        }
+        return products;
+    }
+
 }
 
