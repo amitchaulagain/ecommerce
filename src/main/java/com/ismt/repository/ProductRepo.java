@@ -39,7 +39,7 @@ public class ProductRepo {
 
     public List<Product> listProduct() {
 
-        final String QUERY = "select * from product ";
+        final String QUERY = "SELECT p.id, p.name,p.description,p.price, c.name as category_name FROM product p join category  c where p.category_id=c.id ";
 
         // using try-with-resources to avoid closing resources (boiler plate code)
 
@@ -60,13 +60,10 @@ public class ProductRepo {
                 String name = rs.getString("name");
                 String description = rs.getString("description");
                 Double price = rs.getDouble("price");
-                int categoryId = rs.getInt("category_id");
+                String  categoryName = rs.getString("category_name");
 
 
                 CategoryRepo categoryRepo = new CategoryRepo();
-                Category category = categoryRepo.getById(categoryId);
-
-                String categoryName = category.getName();
 
                 System.out.println(id + "," + name + "," + description + " " + price);
                 products.add(new Product(id, name, description, price, categoryName));

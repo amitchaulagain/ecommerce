@@ -24,7 +24,7 @@ import java.util.List;
  *
  *
  * */
-@WebServlet(urlPatterns = {"/ecommerce", "/checkout","/home"})
+@WebServlet(urlPatterns = {"/ecommerce", "/checkout","/home","/cart"})
 public class FrontEndController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +53,18 @@ public class FrontEndController extends HttpServlet {
             request.setAttribute("hello","hello");
 
             RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+            view.forward(request, response);
+
+        }
+
+
+        if (request.getServletPath().equals("/cart")) {
+
+            List<Product> products= productRepo.showAllProductsForFrontEnd();
+            request.setAttribute("products",products);
+            request.setAttribute("hello","hello");
+
+            RequestDispatcher view = request.getRequestDispatcher("cart.jsp");
             view.forward(request, response);
 
         }

@@ -1,7 +1,6 @@
 package com.ismt.controller;
 
 import com.ismt.model.Category;
-import com.ismt.model.User;
 import com.ismt.model.Order;
 import com.ismt.model.Product;
 import com.ismt.repository.CategoryRepo;
