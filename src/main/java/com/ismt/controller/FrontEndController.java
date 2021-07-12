@@ -1,5 +1,6 @@
 package com.ismt.controller;
 
+import com.ismt.model.CartItem;
 import com.ismt.model.Product;
 import com.ismt.repository.ProductRepo;
 
@@ -9,7 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,18 +27,18 @@ import java.util.List;
  *
  *
  * */
-@WebServlet(urlPatterns = {"/ecommerce", "/checkout","/home","/cart"})
+@WebServlet(urlPatterns = {"/ecommerce", "/checkout", "/home", "/cart", "/addToCart", "/processOrder"})
 public class FrontEndController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    ProductRepo productRepo= new ProductRepo();
+    ProductRepo productRepo = new ProductRepo();
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String path=request.getServletPath();
+        String path = request.getServletPath();
         System.out.println(path);
 
         if (request.getServletPath().equals("/ecommerce")) {
@@ -48,9 +51,9 @@ public class FrontEndController extends HttpServlet {
 
         if (request.getServletPath().equals("/home")) {
 
-        List<Product> products= productRepo.showAllProductsForFrontEnd();
-            request.setAttribute("products",products);
-            request.setAttribute("hello","hello");
+            List<Product> products = productRepo.showAllProductsForFrontEnd();
+            request.setAttribute("products", products);
+            request.setAttribute("hello", "hello");
 
             RequestDispatcher view = request.getRequestDispatcher("index.jsp");
             view.forward(request, response);
@@ -60,15 +63,47 @@ public class FrontEndController extends HttpServlet {
 
         if (request.getServletPath().equals("/cart")) {
 
-            List<Product> products= productRepo.showAllProductsForFrontEnd();
+        /*    List<Product> products= productRepo.showAllProductsForFrontEnd();
             request.setAttribute("products",products);
             request.setAttribute("hello","hello");
 
             RequestDispatcher view = request.getRequestDispatcher("cart.jsp");
-            view.forward(request, response);
+            view.forward(request, response);*/
 
         }
 
+        if (request.getServletPath().equals("/addToCart")) {
+
+            String pName = request.getParameter("name");
+
+            Double price = Double.valueOf(request.getParameter("price"));
+
+            String desc = request.getParameter("description");
+
+            int quantity = 1;
+
+            double total = price * quantity;
+
+            HttpSession session = request.getSession();
+
+            CartItem cart =new CartItem(pName, desc, price, quantity, total);
+
+
+            List<CartItem> items=null;
+            if(session.getAttribute("cart")!=null){
+                 items= (List<CartItem>) session.getAttribute("cart");
+
+            }
+            else {
+                items= new ArrayList<>();
+                items.add(cart);
+            }
+
+        }
+
+        if (request.getServletPath().equals("/processOrder")) {
+
+        }
 
 
     }

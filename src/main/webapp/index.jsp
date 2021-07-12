@@ -248,7 +248,10 @@
 								<img src="tshirt.png">
 							</div>
 							<div style="margin-left:37px" >
-							<a  style="color: blue" title="Add to cart" href="#">Add to cart</a>
+							<a  style="color: blue" title="Add to cart" href="/addToCart?name=${singleProduct.name}& ${singleProduct.price}&${singleProduct.description}">Add to cart</a>
+
+
+								<a  style="color: blue" title="Add to cart" href="/addToCart?name=${singleProduct.name}& ${singleProduct.price}&${singleProduct.description}">Add to cart</a>
 							<br>
 							<a href="product-details.html">${singleProduct.name}</a>
 							<p>${singleProduct.price}</p>
