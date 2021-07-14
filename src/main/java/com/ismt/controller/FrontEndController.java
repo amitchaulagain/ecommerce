@@ -63,20 +63,16 @@ public class FrontEndController extends HttpServlet {
 
         if (request.getServletPath().equals("/cart")) {
 
-        /*    List<Product> products= productRepo.showAllProductsForFrontEnd();
-            request.setAttribute("products",products);
-            request.setAttribute("hello","hello");
-
             RequestDispatcher view = request.getRequestDispatcher("cart.jsp");
-            view.forward(request, response);*/
+            view.forward(request, response);
 
         }
 
         if (request.getServletPath().equals("/addToCart")) {
 
-            String pName = request.getParameter("name");
+            String pName = request.getParameter("productName");
 
-            Double price = Double.valueOf(request.getParameter("price"));
+            Double price = Double.parseDouble(request.getParameter("price"));
 
             String desc = request.getParameter("description");
 
@@ -95,8 +91,10 @@ public class FrontEndController extends HttpServlet {
 
             } else {
                 items = new ArrayList<>();
+                items.add(cart);
+                session.setAttribute("cart", items);
+
             }
-            items.add(cart);
             RequestDispatcher view = request.getRequestDispatcher("cart.jsp");
             view.forward(request, response);
 
