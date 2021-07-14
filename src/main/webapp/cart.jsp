@@ -257,13 +257,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+						<c:forEach var="singleItem" items="${cart}" >
+
+						<tr>
 								<td class="image" data-title="No"><img src="https://via.placeholder.com/100x100" alt="#"></td>
 								<td class="product-des" data-title="Description">
-									<p class="product-name"><a href="#">Women Dress</a></p>
-									<p class="product-des">Maboriosam in a tonto nesciung eget  distingy magndapibus.</p>
+									<p class="product-name"><a href="#">${cart.productName}</a></p>
+									<p class="product-des">${cart.description}.</p>
 								</td>
-								<td class="price" data-title="Price"><span>$110.00 </span></td>
+								<td class="price" data-title="Price"><span>${cart.productName} </span></td>
 								<td class="qty" data-title="Qty"><!-- Input Order -->
 									<div class="input-group">
 										<div class="button minus">
@@ -283,6 +285,7 @@
 								<td class="total-amount" data-title="Total"><span>$220.88</span></td>
 								<td class="action" data-title="Remove"><a href="#"><i class="ti-trash remove-icon"></i></a></td>
 							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 					<!--/ End Shopping Summery -->

@@ -86,18 +86,19 @@ public class FrontEndController extends HttpServlet {
 
             HttpSession session = request.getSession();
 
-            CartItem cart =new CartItem(pName, desc, price, quantity, total);
+            CartItem cart = new CartItem(pName, desc, price, quantity, total);
 
 
-            List<CartItem> items=null;
-            if(session.getAttribute("cart")!=null){
-                 items= (List<CartItem>) session.getAttribute("cart");
+            List<CartItem> items = null;
+            if (session.getAttribute("cart") != null) {
+                items = (List<CartItem>) session.getAttribute("cart");
 
+            } else {
+                items = new ArrayList<>();
             }
-            else {
-                items= new ArrayList<>();
-                items.add(cart);
-            }
+            items.add(cart);
+            RequestDispatcher view = request.getRequestDispatcher("cart.jsp");
+            view.forward(request, response);
 
         }
 

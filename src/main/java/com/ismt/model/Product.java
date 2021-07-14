@@ -6,6 +6,8 @@ public class Product {
     private String description;
     private double price;
     private String categoryName;
+    private String imgUrl;
+
 
     public Product(int id, String name, String description, double price) {
         this.id = id;
@@ -60,5 +62,14 @@ public class Product {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

@@ -245,13 +245,10 @@
 					<%--todo--%>
 						<div style="width: 500px;height:500px; float:left" >
 							<div >
-								<img src="tshirt.png">
+								<img src="${singleProduct.imgUrl}">
 							</div>
 							<div style="margin-left:37px" >
 							<a  style="color: blue" title="Add to cart" href="/addToCart?name=${singleProduct.name}& ${singleProduct.price}&${singleProduct.description}">Add to cart</a>
-
-
-								<a  style="color: blue" title="Add to cart" href="/addToCart?name=${singleProduct.name}& ${singleProduct.price}&${singleProduct.description}">Add to cart</a>
 							<br>
 							<a href="product-details.html">${singleProduct.name}</a>
 							<p>${singleProduct.price}</p>
