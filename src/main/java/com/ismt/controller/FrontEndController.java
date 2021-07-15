@@ -115,6 +115,8 @@ public class FrontEndController extends HttpServlet {
         }
 
         if (request.getServletPath().equals("/processOrder")) {
+            Set<CartItem> items = null;
+            items = (Set<CartItem>) request.getSession().getAttribute("cart");
 
         }
 
