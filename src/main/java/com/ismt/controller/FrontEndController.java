@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /*
@@ -84,19 +85,32 @@ public class FrontEndController extends HttpServlet {
 
             CartItem cart = new CartItem(pName, desc, price, quantity, total);
 
-
-            List<CartItem> items = null;
+            boolean addIt = false;
+            Set<CartItem> items = null;
             if (session.getAttribute("cart") != null) {
-                items = (List<CartItem>) session.getAttribute("cart");
+                items = (Set<CartItem>) session.getAttribute("cart");
+
+
+                for (CartItem item : items) {
+                    if (item.getProductName().equals(cart.getProductName())) {
+                        item.setQuantity(item.getQuantity() + 1);
+                    } else {
+                        if (cart.getQuantity() == 1) {
+                            addIt = true;
+                        }
+                    }
+                }
+                if (addIt) {
+                    items.add(cart);
+                }
 
             } else {
-                items = new ArrayList<>();
+                items = new HashSet<>();
                 items.add(cart);
                 session.setAttribute("cart", items);
 
             }
-            RequestDispatcher view = request.getRequestDispatcher("cart.jsp");
-            view.forward(request, response);
+            response.sendRedirect("/home");
 
         }
 
