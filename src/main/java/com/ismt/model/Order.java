@@ -3,10 +3,14 @@ package com.ismt.model;
 public class Order {
 	int id;
 	String order_number;
-	String total;
+	double total;
 	int customer_id;
+	String customerName;
+	String billingAddress;
+	String phoneNumber;
 
-	public Order(int id, String order_number, String total) {
+
+	public Order(int id, String order_number, double total) {
 		this.id = id;
 		this.order_number = order_number;
 		this.total = total;
@@ -23,7 +27,7 @@ public class Order {
 		this.customer_id = customer_id;
 	}
 
-	public Order(int id, String order_number, String total, int customer_id) {
+	public Order(int id, String order_number, double total, int customer_id) {
 		this.id = id;
 		this.order_number = order_number;
 		this.total = total;
@@ -46,11 +50,38 @@ public class Order {
 		this.order_number = order_number;
 	}
 
-	public String getTotal() {
+	public double getTotal() {
 		return total;
 	}
 
-	public void setTotal(String total) {
+	public void setTotal(double total) {
 		this.total = total;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public Order setCustomerName(String customerName) {
+		this.customerName = customerName;
+		return this;
+	}
+
+	public String getBillingAddress() {
+		return billingAddress;
+	}
+
+	public Order setBillingAddress(String billingAddress) {
+		this.billingAddress = billingAddress;
+		return this;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public Order setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+		return this;
 	}
 }

@@ -262,27 +262,60 @@
 					<!--/ End Shopping Summery -->
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-12">
-					<!-- Total Amount -->
-					<div class="total-amount">
-						<div class="row">
-							<div class="col-lg-4 col-md-7 col-12">
-								<div class="right">
-									<ul>
-										<li>Cart Subtotal<span>${total}</span></li>
-									</ul>
-									<div class="button5">
-										<a href="/checkout" class="btn">Checkout</a>
-										<a href="#" class="btn">Continue shopping</a>
+
+			<h1> Enter Customer Information</h1>
+			<div class="col-12">
+				<form action="/processOrder" method="post">
+					<div class="form-group row">
+						<label for="name" class="col-2 col-form-label">
+							Customer Name</label>
+						<div class="col-10">
+							<input class="form-control" type="text" name="customerName"
+								   value=""
+								   placeholder=" Customer Name">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="name" class="col-2 col-form-label">
+							Customer Address</label>
+						<div class="col-10">
+							<input class="form-control" type="text" name="customerAddress"
+								   value=""
+								   placeholder=" Customer Name">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="description" class="col-2 col-form-label">Phone Number</label>
+						<div class="col-10">
+							<input class="form-control" type="text" name="phoneNumber"
+								   value=""
+								   placeholder="Enter phone ">
+						</div>
+					</div>
+				</form>
+				<div class="row">
+					<div class="col-12">
+						<!-- Total Amount -->
+						<div class="total-amount">
+							<div class="row">
+								<div class="col-lg-4 col-md-7 col-12">
+									<div class="right">
+										<ul>
+											<li>Cart Subtotal<span>${total}</span></li>
+										</ul>
+										<div class="button5">
+											<a href="/processOrder" class="btn">Checkout</a>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<!--/ End Total Amount -->
 					</div>
-					<!--/ End Total Amount -->
 				</div>
 			</div>
+
+
 		</div>
 	</div>
 	<!--/ End Shopping Cart -->

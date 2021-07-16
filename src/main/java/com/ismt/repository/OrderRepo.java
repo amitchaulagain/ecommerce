@@ -23,7 +23,7 @@ public class OrderRepo {
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
             preparedStatement.setInt(1, order.getId());
             preparedStatement.setString(2, order.getOrder_number());
-            preparedStatement.setString(2, order.getTotal());
+            preparedStatement.setDouble(3, order.getTotal());
 
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
@@ -56,7 +56,7 @@ public class OrderRepo {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String order_number = rs.getString("order_number");
-                String total = rs.getString("total");
+                double total = rs.getDouble("total");
                 int customer_id = rs.getInt("customer_id");
                 System.out.println(id + "," + order_number + "," + total+" "+customer_id);
                 order.add(new Order(id, order_number, total,customer_id));
@@ -111,7 +111,7 @@ public class OrderRepo {
             rs.next();
             int categoryId = rs.getInt("id");
             String order_number = rs.getString("order_number");
-            String total = rs.getString("total");
+            double total = rs.getDouble("total");
             System.out.println(id + "," + order_number + "," + total);
             order = new Order(categoryId, order_number, total);
 
@@ -134,7 +134,7 @@ public class OrderRepo {
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USERS_SQL)) {
             preparedStatement.setInt(1, order.getId());
             preparedStatement.setString(2, order.getOrder_number());
-            preparedStatement.setString(3, order.getTotal());
+            preparedStatement.setDouble(3, order.getTotal());
 
             // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();

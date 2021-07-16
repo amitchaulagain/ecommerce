@@ -14,13 +14,10 @@
 
     SUCCESS  !!!
 
-    ${company}
-
-    <h1>${test}</h1>
 
 
 	    <p>
-	        <a href="/user" class="btn btn-primary" role="button">View All Users</a>
+	        <a href="/home" class="btn btn-primary" role="button">Continue Shopping</a>
 	    </p>
 	</div>
 

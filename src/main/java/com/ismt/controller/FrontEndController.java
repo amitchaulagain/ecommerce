@@ -1,7 +1,9 @@
 package com.ismt.controller;
 
 import com.ismt.model.CartItem;
+import com.ismt.model.Order;
 import com.ismt.model.Product;
+import com.ismt.repository.OrderRepo;
 import com.ismt.repository.ProductRepo;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -85,7 +88,7 @@ public class FrontEndController extends HttpServlet {
 
             CartItem cart = new CartItem(pName, desc, price, quantity, total);
 
-            boolean addIt = false;
+            boolean addIt = true;
             Set<CartItem> items = null;
             if (session.getAttribute("cart") != null) {
                 items = (Set<CartItem>) session.getAttribute("cart");
@@ -94,12 +97,13 @@ public class FrontEndController extends HttpServlet {
                 for (CartItem item : items) {
                     if (item.getProductName().equals(cart.getProductName())) {
                         item.setQuantity(item.getQuantity() + 1);
-                    } else {
-                        if (cart.getQuantity() == 1) {
-                            addIt = true;
-                        }
+                        item.setItemTotal(item.getQuantity() * item.getPrice());
+                        addIt = false;
+                        break;
                     }
                 }
+
+
                 if (addIt) {
                     items.add(cart);
                 }
@@ -110,16 +114,84 @@ public class FrontEndController extends HttpServlet {
                 session.setAttribute("cart", items);
 
             }
+
+            session.setAttribute("total", calculateTotal(items));
+
+
             response.sendRedirect("/home");
 
         }
 
-        if (request.getServletPath().equals("/processOrder")) {
-            Set<CartItem> items = null;
-            items = (Set<CartItem>) request.getSession().getAttribute("cart");
+        if (request.getServletPath().equals("/checkout")) {
+            RequestDispatcher view = request.getRequestDispatcher("checkout.jsp");
+            view.forward(request, response);
+
 
         }
 
+
+    }
+
+
+
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String path = request.getServletPath();
+        System.out.println(path);
+
+        if (request.getServletPath().equals("/processOrder")) {
+
+            String customerName= request.getParameter("customerName");
+            String customerAddress= request.getParameter("customerAddress");
+            String phoneNumber= request.getParameter("phoneNumber");
+
+
+            Double orderTotal= (Double) request.getSession().getAttribute("total");
+
+            Order order = new Order();
+            order.setCustomerName(customerName);
+            order.setBillingAddress(customerAddress);
+            order.setPhoneNumber(phoneNumber);
+            order.setTotal(orderTotal);
+
+
+            OrderRepo repo= new OrderRepo();
+            try {
+                repo.insert(order);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+            // we need to have order id as soon as order is saved to db.
+           // int id =1;
+
+
+
+
+
+
+
+
+
+
+
+            RequestDispatcher view = request.getRequestDispatcher("success.jsp");
+            view.forward(request, response);
+
+
+        }
+
+
+    }
+    private double calculateTotal(Set<CartItem> items) {
+        double total = 0;
+        for (CartItem item : items) {
+            total += item.getItemTotal();
+        }
+        return total;
 
     }
 }
