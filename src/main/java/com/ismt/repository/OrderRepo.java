@@ -3,36 +3,43 @@ package com.ismt.repository;
 import com.ismt.JDBCUtils;
 import com.ismt.model.Order;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderRepo {
 
 
-    public void insert(Order order) throws SQLException {
+    public int insert(Order order) throws SQLException {
+        int orderId = 0;
         final String INSERT_USERS_SQL = "INSERT INTO orders" +
-                "  (id, order_number, total) VALUES " +
-                " (?, ?, ?);";
+                "  (id, order_number,customer_name,billing_address,phone, total) VALUES " +
+                " (?, ?, ?,?,?,?)";
         // Step 1: Establishing a Connection
         try (Connection connection = JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, order.getId());
             preparedStatement.setString(2, order.getOrder_number());
-            preparedStatement.setDouble(3, order.getTotal());
+            preparedStatement.setString(3, order.getCustomerName());
+            preparedStatement.setString(4, order.getBillingAddress());
+            preparedStatement.setString(5, order.getPhoneNumber());
+            preparedStatement.setDouble(6, order.getTotal());
 
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            // print SQL exception information
-            JDBCUtils.printSQLException(e);
+
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                orderId = Integer.parseInt(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        // Step 4: try-with-resource statement will auto close the connection.
+        return orderId;
+
+
     }
 
     public List<Order> listOrder() {
@@ -58,8 +65,8 @@ public class OrderRepo {
                 String order_number = rs.getString("order_number");
                 double total = rs.getDouble("total");
                 int customer_id = rs.getInt("customer_id");
-                System.out.println(id + "," + order_number + "," + total+" "+customer_id);
-                order.add(new Order(id, order_number, total,customer_id));
+                System.out.println(id + "," + order_number + "," + total + " " + customer_id);
+                order.add(new Order(id, order_number, total, customer_id));
             }
         } catch (SQLException e) {
             JDBCUtils.printSQLException(e);
@@ -122,6 +129,48 @@ public class OrderRepo {
         return order;
     }
 
+
+    public Order getByOrderNumber(String orderNumber) {
+        final String QUERY = "select * from orders where order_number =?";
+        Order order = null;
+        try (Connection connection = JDBCUtils.getConnection();
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);) {
+            preparedStatement.setString(1, orderNumber);
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            // while (rs.next()) {
+            rs.next();
+            int id = rs.getInt("id");
+            String order_number = rs.getString("order_number");
+            double total = rs.getDouble("total");
+            String customerName = rs.getString("customer_name");
+            String billingAddress = rs.getString("billing_address");
+            String phone = rs.getString("phone");
+
+
+            order.setId(id);
+            order.setOrder_number(order_number);
+
+            order.setTotal(total);
+
+            order.setCustomerName(customerName);
+            order.setBillingAddress(billingAddress);
+            order.setPhoneNumber(phone);
+
+
+            //}
+        } catch (SQLException e) {
+            JDBCUtils.printSQLException(e);
+        }
+        return order;
+    }
+
+
     public void edit(Order order) {
 
         final String UPDATE_USERS_SQL = "update orders set order_number = ?, total=? where id = ?;";
@@ -146,5 +195,27 @@ public class OrderRepo {
         }
 
     }
+
+
+    /*public static int createOrder(Double total_cost, int customer_id, String shipping_address, String phone,
+                                  String payment_method) {
+        int order_id = 0;
+        String query = "insert into orders(total_cost, customer_id, shipping_address, phone, payment_method) values(?, ? ,?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setDouble(1, total_cost);
+            ps.setInt(2, customer_id);
+            ps.setString(3, shipping_address);
+            ps.setString(4, phone);
+            ps.setString(5, payment_method);
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                order_id = Integer.parseInt(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return order_id;
+    }*/
 }
 

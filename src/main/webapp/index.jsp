@@ -220,7 +220,7 @@
 								<img src="${singleProduct.imgUrl}">
 							</div>
 							<div style="margin-left:37px" >
-							<a  style="color: blue" title="Add to cart" href="/addToCart?productName=${singleProduct.name}&price=${singleProduct.price}&description=${singleProduct.description}">Add to cart</a>
+							<a  style="color: blue" title="Add to cart" href="/addToCart?productName=${singleProduct.name}&price=${singleProduct.price}&description=${singleProduct.description}&productId=${singleProduct.id}">Add to cart</a>
 							<br>
 							<a href="product-details.html">${singleProduct.name}</a>
 							<p>${singleProduct.price}</p>

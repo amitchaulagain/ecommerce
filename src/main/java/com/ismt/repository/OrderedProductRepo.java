@@ -15,17 +15,16 @@ public class OrderedProductRepo {
 
 
     public void insert(OrderedProduct orderedProduct) throws SQLException {
-        final String INSERT_ORDERED_PRODUCT_SQL = "INSERT INTO orderedProducted-product" +
-                "  (id, product_id, order_id,quantity) VALUES " +
+        final String INSERT_ORDERED_PRODUCT_SQL = "INSERT INTO orderedproduct " +
+                "  (product_id, order_id,quantity) VALUES " +
                 " (?, ?, ?);";
         // Step 1: Establishing a Connection
         try (Connection connection = JDBCUtils.getConnection();
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDERED_PRODUCT_SQL)) {
-            preparedStatement.setInt(1, orderedProduct.getId());
-            preparedStatement.setInt(2, orderedProduct.getProduct_id());
-            preparedStatement.setInt(3, orderedProduct.getOrder_id());
-            preparedStatement.setInt(4, orderedProduct.getQuantity());
+            preparedStatement.setInt(1, orderedProduct.getProduct_id());
+            preparedStatement.setInt(2, orderedProduct.getOrder_id());
+            preparedStatement.setInt(3, orderedProduct.getQuantity());
 
 
             System.out.println(preparedStatement);

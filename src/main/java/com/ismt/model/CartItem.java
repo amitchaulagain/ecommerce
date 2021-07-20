@@ -1,6 +1,7 @@
 package com.ismt.model;
 
 public class CartItem {
+    private int productId;
     private String productName;
     private String description;
     private double price;
@@ -8,12 +9,14 @@ public class CartItem {
     private double itemTotal;
 
 
-    public CartItem(String productName, String description, double price, int quantity, double itemTotal) {
+
+    public CartItem(String productName, String description, double price, int quantity, double itemTotal,int productId) {
         this.productName = productName;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
         this.itemTotal = itemTotal;
+        this.productId=productId;
     }
 
     public String getProductName() {
@@ -61,7 +64,11 @@ public class CartItem {
         return this;
     }
 
+    public int getProductId() {
+        return productId;
+    }
 
-
-
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 }

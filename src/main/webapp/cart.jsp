@@ -274,7 +274,7 @@
 									</ul>
 									<div class="button5">
 										<a href="/checkout" class="btn">Checkout</a>
-										<a href="#" class="btn">Continue shopping</a>
+										<a href="/home" class="btn">Continue shopping</a>
 									</div>
 								</div>
 							</div>

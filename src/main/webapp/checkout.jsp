@@ -281,7 +281,7 @@
 						<div class="col-10">
 							<input class="form-control" type="text" name="customerAddress"
 								   value=""
-								   placeholder=" Customer Name">
+								   placeholder=" Customer Address">
 						</div>
 					</div>
 					<div class="form-group row">
@@ -292,27 +292,23 @@
 								   placeholder="Enter phone ">
 						</div>
 					</div>
-				</form>
-				<div class="row">
-					<div class="col-12">
-						<!-- Total Amount -->
-						<div class="total-amount">
-							<div class="row">
-								<div class="col-lg-4 col-md-7 col-12">
-									<div class="right">
-										<ul>
-											<li>Cart Subtotal<span>${total}</span></li>
-										</ul>
-										<div class="button5">
-											<a href="/processOrder" class="btn">Checkout</a>
+
+							<!-- Total Amount -->
+							<div class="total-amount">
+								<div class="row">
+									<div class="col-lg-4 col-md-7 col-12">
+										<div class="right">
+											<ul>
+												<li>Cart Subtotal<span>${total}</span></li>
+											</ul>
+											<input type="submit" value="Confirm">
 										</div>
 									</div>
-								</div>
-							</div>
+							<!--/ End Total Amount -->
 						</div>
-						<!--/ End Total Amount -->
 					</div>
-				</div>
+				</form>
+
 			</div>
 
 

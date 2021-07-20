@@ -2,8 +2,10 @@ package com.ismt.controller;
 
 import com.ismt.model.CartItem;
 import com.ismt.model.Order;
+import com.ismt.model.OrderedProduct;
 import com.ismt.model.Product;
 import com.ismt.repository.OrderRepo;
+import com.ismt.repository.OrderedProductRepo;
 import com.ismt.repository.ProductRepo;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +20,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 /*
@@ -75,6 +78,7 @@ public class FrontEndController extends HttpServlet {
         if (request.getServletPath().equals("/addToCart")) {
 
             String pName = request.getParameter("productName");
+            String pId = request.getParameter("productId");
 
             Double price = Double.parseDouble(request.getParameter("price"));
 
@@ -86,7 +90,7 @@ public class FrontEndController extends HttpServlet {
 
             HttpSession session = request.getSession();
 
-            CartItem cart = new CartItem(pName, desc, price, quantity, total);
+            CartItem cart = new CartItem(pName, desc, price, quantity, total, Integer.parseInt(pId));
 
             boolean addIt = true;
             Set<CartItem> items = null;
@@ -133,49 +137,70 @@ public class FrontEndController extends HttpServlet {
     }
 
 
-
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String path = request.getServletPath();
         System.out.println(path);
+        OrderRepo repo = new OrderRepo();
+        int orderId=0;
 
         if (request.getServletPath().equals("/processOrder")) {
 
-            String customerName= request.getParameter("customerName");
-            String customerAddress= request.getParameter("customerAddress");
-            String phoneNumber= request.getParameter("phoneNumber");
+            String customerName = request.getParameter("customerName");
+            String customerAddress = request.getParameter("customerAddress");
+            String phoneNumber = request.getParameter("phoneNumber");
 
 
-            Double orderTotal= (Double) request.getSession().getAttribute("total");
+            Double orderTotal = (Double) request.getSession().getAttribute("total");
 
             Order order = new Order();
             order.setCustomerName(customerName);
             order.setBillingAddress(customerAddress);
             order.setPhoneNumber(phoneNumber);
+            order.setOrder_number(generate());
             order.setTotal(orderTotal);
 
 
-            OrderRepo repo= new OrderRepo();
             try {
-                repo.insert(order);
+                orderId=repo.insert(order);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+            OrderedProductRepo orderedProductRepo = new OrderedProductRepo();
+
+            Set<CartItem> items = (Set<CartItem>) request.getSession().getAttribute("cart");
+
+
+
+            for (CartItem item : items) {
+
+                OrderedProduct op = new OrderedProduct();
+                op.setOrder_id(orderId);
+                op.setProduct_id(item.getProductId());
+                op.setQuantity(item.getQuantity());
+
+
+                try {
+                    orderedProductRepo.insert(op);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+
+            //clear all the cart items
+            request.getSession().setAttribute("cart", null);
+            request.getSession().setAttribute("total", null);
+
+
+            //just to check whether cart is refreshed or not
+            //request.getSession().getAttribute("cart");
 
             // we need to have order id as soon as order is saved to db.
-           // int id =1;
-
-
-
-
-
-
-
-
-
+            // int id =1;
 
 
             RequestDispatcher view = request.getRequestDispatcher("success.jsp");
@@ -186,6 +211,7 @@ public class FrontEndController extends HttpServlet {
 
 
     }
+
     private double calculateTotal(Set<CartItem> items) {
         double total = 0;
         for (CartItem item : items) {
@@ -194,4 +220,11 @@ public class FrontEndController extends HttpServlet {
         return total;
 
     }
+
+    public String generate() {
+        int num = ThreadLocalRandom.current().nextInt();
+        return "ORD -" + num;
+    }
+
+
 }
