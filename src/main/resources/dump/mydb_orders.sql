@@ -16,30 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
+CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  `username` varchar(45) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
-  `role` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `order_number` varchar(45) DEFAULT NULL,
+  `total` double DEFAULT NULL,
+  `customer_name` varchar(100) NOT NULL,
+  `billing_address` varchar(45) NOT NULL,
+  `phone` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`,`customer_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `orders`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'ram','ram@gmail.com','pass','ADMIN'),(2,'sam','sam@gmail.com','pass','ADMIN');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (14,'ORD -560917292',20000,'john','12','21'),(15,'ORD -792209043',10000,'sam','122121','211212'),(16,'ORD -415336825',20000,'robert','ssf','22121'),(17,'ORD -1869417936',30000,'ram','ad','121221'),(18,'ORD -2031015472',30000,'asd','ad','121212'),(19,'ORD -437309662',30000,'hari','tinkune','981212121212');
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-16  8:10:36
+-- Dump completed on 2021-07-21  1:34:51

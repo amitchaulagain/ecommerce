@@ -24,15 +24,16 @@ DROP TABLE IF EXISTS `ordered-product`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ordered-product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orders_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`product_id`,`order_id`),
-  KEY `fk_order_has_product_product1_idx` (`product_id`,`order_id`),
-  KEY `fk_order_has_product_order1_idx` (`id`),
-  CONSTRAINT `fk_order_has_product_order1` FOREIGN KEY (`id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_order_has_product_product1` FOREIGN KEY (`product_id`, `order_id`) REFERENCES `product` (`id`, `category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `quantity` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`,`orders_id`,`product_id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `product-fk_idx` (`product_id`),
+  KEY `orders-fk_idx` (`orders_id`),
+  CONSTRAINT `orders-fk` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `product-fk` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +42,7 @@ CREATE TABLE `ordered-product` (
 
 LOCK TABLES `ordered-product` WRITE;
 /*!40000 ALTER TABLE `ordered-product` DISABLE KEYS */;
+INSERT INTO `ordered-product` VALUES (1,14,1,1),(2,15,1,1),(3,18,1,1),(4,18,2,1),(5,18,2,1),(6,19,1,1),(7,19,2,1);
 /*!40000 ALTER TABLE `ordered-product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-16  8:10:36
+-- Dump completed on 2021-07-21  1:34:51
