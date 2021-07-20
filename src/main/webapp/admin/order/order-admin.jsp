@@ -141,7 +141,10 @@
                         <th>Id</th>
                         <th>Order Number</th>
                         <th>Total</th>
-                        <th>Customer Id</th>
+                        <th>Customer Name</th>
+                         <th>Customer Address</th>
+                        <th>Phone</th>
+
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -149,13 +152,16 @@
     <c:forEach var="oneOrder" items="${orderList}" >
             <tr class="text-center">
                 <td><c:out value="${oneOrder.id}" /></td>
-                <td><c:out value="${oneOrder.order_number}" /></td>
+                <td><c:out value="${oneOrder.orderNumber}" /></td>
                 <td><c:out value="${oneOrder.total}" /></td>
-                <td><c:out value="${oneOrder.customer_id}" /></td>
+                <td><c:out value="${oneOrder.customerName}" /></td>
+                 <td><c:out value="${oneOrder.billingAddress}" /></td>
+                <td><c:out value="${oneOrder.phoneNumber}" /></td>
+
 
                 <td>
                  <a  role="button" style="color:white; padding:1px 5px 1px 5px;" class="btn"
-                                            href="/user?id=<c:out value="${oneOrder.id }"/>">Details</a>
+                                            href="/orderDetails?id=<c:out value="${oneOrder.id }"/>">Details</a>
                 <a  role="button"style="color:white; padding:1px 5px 1px 5px;" class="btn"
                     href="/editUser?id=<c:out value="${oneOrder.id }"/>">Update</a>
 

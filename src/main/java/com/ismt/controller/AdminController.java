@@ -2,9 +2,11 @@ package com.ismt.controller;
 
 import com.ismt.model.Category;
 import com.ismt.model.Order;
+import com.ismt.model.OrderItem;
 import com.ismt.model.Product;
 import com.ismt.repository.CategoryRepo;
 import com.ismt.repository.OrderRepo;
+import com.ismt.repository.OrderedProductRepo;
 import com.ismt.repository.ProductRepo;
 
 import javax.servlet.RequestDispatcher;
@@ -29,13 +31,15 @@ import java.util.List;
  *
  *
  * */
-@WebServlet(urlPatterns = {"/category", "/product", "/order", "/admin"})
+@WebServlet(urlPatterns = {"/category", "/product", "/order", "/admin","/orderDetails"})
 public class AdminController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     CategoryRepo categoryRepo = new CategoryRepo();
     ProductRepo productRepo =new ProductRepo();
     OrderRepo orderRepo = new OrderRepo();
+    OrderedProductRepo orderedProductRepo = new OrderedProductRepo();
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -69,6 +73,16 @@ public class AdminController extends HttpServlet {
             List<Order> orders = orderRepo.listOrder();
             request.setAttribute("orderList",orders);
             RequestDispatcher view = request.getRequestDispatcher("admin/order/order-admin.jsp");
+            view.forward(request, response);
+        }
+        else if (request.getServletPath().equals("/orderDetails")) {
+
+            request.setAttribute("entity", "Order");
+            int id=Integer.parseInt(request.getParameter("id"));
+
+            List<OrderItem> orders = orderedProductRepo.listOrderedProduct(id);
+            request.setAttribute("details",orders);
+            RequestDispatcher view = request.getRequestDispatcher("admin/order/order-details.jsp");
             view.forward(request, response);
         }
 

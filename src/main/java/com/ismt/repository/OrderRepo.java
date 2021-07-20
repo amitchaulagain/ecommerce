@@ -20,7 +20,7 @@ public class OrderRepo {
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, order.getId());
-            preparedStatement.setString(2, order.getOrder_number());
+            preparedStatement.setString(2, order.getOrderNumber());
             preparedStatement.setString(3, order.getCustomerName());
             preparedStatement.setString(4, order.getBillingAddress());
             preparedStatement.setString(5, order.getPhoneNumber());
@@ -63,10 +63,12 @@ public class OrderRepo {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String order_number = rs.getString("order_number");
+                String customer_name = rs.getString("customer_name");
+                String billing_address = rs.getString("billing_address");
+                String phone = rs.getString("phone");
+
                 double total = rs.getDouble("total");
-                int customer_id = rs.getInt("customer_id");
-                System.out.println(id + "," + order_number + "," + total + " " + customer_id);
-                order.add(new Order(id, order_number, total, customer_id));
+                order.add(new Order(id, order_number, total,customer_name,billing_address,phone ));
             }
         } catch (SQLException e) {
             JDBCUtils.printSQLException(e);
@@ -120,7 +122,7 @@ public class OrderRepo {
             String order_number = rs.getString("order_number");
             double total = rs.getDouble("total");
             System.out.println(id + "," + order_number + "," + total);
-            order = new Order(categoryId, order_number, total);
+          //  order = new Order(categoryId, order_number, total);
 
             //}
         } catch (SQLException e) {
@@ -154,7 +156,7 @@ public class OrderRepo {
 
 
             order.setId(id);
-            order.setOrder_number(order_number);
+            order.setOrderNumber(order_number);
 
             order.setTotal(total);
 
@@ -182,7 +184,7 @@ public class OrderRepo {
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USERS_SQL)) {
             preparedStatement.setInt(1, order.getId());
-            preparedStatement.setString(2, order.getOrder_number());
+            preparedStatement.setString(2, order.getOrderNumber());
             preparedStatement.setDouble(3, order.getTotal());
 
             // Step 3: Execute the query or update query

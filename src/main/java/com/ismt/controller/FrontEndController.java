@@ -159,7 +159,7 @@ public class FrontEndController extends HttpServlet {
             order.setCustomerName(customerName);
             order.setBillingAddress(customerAddress);
             order.setPhoneNumber(phoneNumber);
-            order.setOrder_number(generate());
+            order.setOrderNumber(generate());
             order.setTotal(orderTotal);
 
 
