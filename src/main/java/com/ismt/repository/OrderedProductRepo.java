@@ -38,7 +38,6 @@ public class OrderedProductRepo {
     }
 
 
-    //TODO LATER
     public List<OrderItem> listOrderedProduct(int id) {
 
         final String QUERY = "select name,description,price,quantity from `ordered-product` op join `orders` o join product p where p.id=op.product_id and o.id=op.orders_id and orders_id=?";
